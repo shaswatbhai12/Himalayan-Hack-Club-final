@@ -23,7 +23,7 @@ Optional: HC_CLIENT_ID, HC_REDIRECT_URI (defaults are already set in the code)
 1. Install Node.js 18 or newer (nodejs.org).
 2. In the project folder, copy `.env.example` to `.env` and fill in HC_CLIENT_SECRET and SESSION_SECRET.
 3. In your Hack Club Auth app, ADD this redirect URI (keep the Vercel one too): http://localhost:3000/api/hc-callback
-4. Run: node server.js   (or: npm start)
+4. Run: node local-server.js   (or: npm start)
 5. Open http://localhost:3000 and try Login > Member login.
 6. For Clerk, use your pk_test_ key in index.html (works on localhost).
 When you deploy to Vercel, do NOT upload .env. Set the env vars in Vercel instead, and leave HC_REDIRECT_URI unset there.

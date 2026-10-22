@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
       }),
     });
     const tok = await tr.json();
+    console.log("[hackatime token] got token:", !!tok.access_token, "scope:", tok.scope, "error:", tok.error || "-");
     if (!tok.access_token) return res.redirect(302, "/dashboard.html?ht=error");
     res.setHeader("Set-Cookie", [`ht_token=${enc(tok.access_token)}; ${flags}; Max-Age=31536000`, `ht_state=; ${flags}; Max-Age=0`]);
     res.redirect(302, "/dashboard.html?ht=ok");

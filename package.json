@@ -1,5 +1,5 @@
 {
   "name": "himalayan-hack-club",
   "private": true,
-  "scripts": { "start": "node server.js" }
+  "scripts": { "start": "node local-server.js" }
 }

@@ -18,7 +18,9 @@ module.exports = async (req, res) => {
     if (!tok.access_token) return res.status(401).send("Login failed: could not get a token. Check HC_CLIENT_SECRET and the redirect URI.");
     const ur = await fetch("https://auth.hackclub.com/oauth/userinfo", { headers: { Authorization: "Bearer " + tok.access_token } });
     const u = await ur.json();
-    const session = sign({ name: u.name || u.email || "Member", email: u.email || "", sub: u.sub || "" });
+    console.log("[hc userinfo fields]", Object.keys(u).join(", "));
+    const full = u.name || [u.given_name, u.family_name].filter(Boolean).join(" ") || u.nickname || u.preferred_username || "";
+    const session = sign({ name: full || (u.email ? u.email.split("@")[0] : "Member"), email: u.email || "", sub: u.sub || "" });
     res.setHeader("Set-Cookie", [
       `hc_session=${session}; ${flags}; Max-Age=604800`,
       `hc_state=; ${flags}; Max-Age=0`,
