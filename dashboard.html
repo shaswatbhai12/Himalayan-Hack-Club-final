@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dashboard | Himalayan Hack Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ec3750;--bg:#fff;--ink:#1f2d3d;--mute:#5a6b7d;--card:#f3f6f9;--line:#e0e6ed}
+@media(prefers-color-scheme:dark){:root{--bg:#17212b;--ink:#f3f6f9;--mute:#a3b1c2;--card:#202d3b;--line:#2f3f52}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Bricolage Grotesque",system-ui,sans-serif;padding-top:env(safe-area-inset-top,0px)}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{border-bottom:2px solid var(--line)}.nav{display:flex;justify-content:space-between;align-items:center;height:64px;gap:12px}
+.logo{font-weight:800;text-decoration:none;color:inherit}.logo b{color:var(--red)}
+.btn{display:inline-block;background:var(--red);color:#fff;font:inherit;font-weight:800;text-decoration:none;padding:10px 20px;border-radius:99px;border:0;cursor:pointer}
+.btn.ghost{background:none;color:var(--ink);border:2px solid var(--ink)}
+h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:36px 0 6px;letter-spacing:-.02em}h1 span{color:var(--red)}
+h2{font-size:1.5rem;margin:36px 0 12px}.mute{color:var(--mute);margin:0}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:22px}
+.stat,.card{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:20px}
+.stat b{display:block;font-size:2.1rem;line-height:1.1;color:var(--red)}.stat span{color:var(--mute);font-size:.95rem}
+.proj{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.proj h3{margin:0;font-size:1.1rem}.tag{font-size:.8rem;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--bg);border:2px solid var(--line)}
+.tag.on{background:var(--red);border-color:var(--red);color:#fff}
+.notice{background:var(--card);border:2px dashed var(--red);border-radius:18px;padding:22px;margin-top:22px}
+.notice .btn{margin-top:12px}[hidden]{display:none!important}
+a{color:var(--red)}footer{margin:50px 0 30px;color:var(--mute);font-size:.9rem}
+</style></head><body>
+<header><div class="wrap nav"><a class="logo" href="/">&lt;/&gt; Himalayan <b>Hack Club</b></a><span><a class="btn ghost" href="/">Home</a> <a class="btn" id="logout" href="/api/logout" hidden>Log out</a></span></div></header>
+<main class="wrap">
+<div id="loading"><p class="mute" style="margin-top:40px">Loading your dashboard...</p></div>
+
+<div id="guest" hidden><h1>Please <span>log in</span></h1><p class="mute">Use the Login menu on the home page to sign in as a member or staff.</p><p><a class="btn" href="/api/hc-login">Member login (Hack Club)</a></p></div>
+
+<div id="member" hidden>
+<h1>Hey, <span id="mName">member</span></h1><p class="mute" id="mEmail"></p>
+<div class="notice" id="connect" hidden><b>Connect Hackatime</b><p class="mute" id="connectMsg">See your coding time, streak and projects here. You choose what to share, and you can revoke access any time in Hackatime.</p><a class="btn" href="/api/ht-login">Connect Hackatime</a></div>
+<div id="stats" hidden>
+<div class="stats"><div class="stat"><b id="sTotal">-</b><span>Total coding time</span></div><div class="stat"><b id="sWeek">-</b><span>Last 7 days</span></div><div class="stat"><b id="sStreak">-</b><span>Day streak</span></div><div class="stat"><b id="sActive">-</b><span>Active projects (30 days)</span></div></div>
+<h2>Your projects</h2><div id="projects"></div></div>
+<h2>Your account</h2>
+<div class="card"><p style="margin:0 0 8px"><b>Mailing address</b></p><p class="mute">Your address is stored in your Hack Club account. Hack Club only lets official programs read or edit addresses, so this site can't change it for you. You can update it yourself at <a href="https://auth.hackclub.com/" target="_blank" rel="noopener">auth.hackclub.com</a>.</p>
+<p style="margin:16px 0 8px"><b>Hackatime settings</b></p><p class="mute">Manage your keys and connected apps at <a href="https://hackatime.hackclub.com/my/settings" target="_blank" rel="noopener">hackatime.hackclub.com</a>.</p></div>
+</div>
+
+<div id="staff" hidden>
+<h1>Welcome, <span id="stName">staff</span></h1><p class="mute" id="stEmail"></p>
+<h2>Staff area</h2><div class="card"><p class="mute" style="margin:0">You are signed in as club staff. Staff tools (join requests, attendance, announcements) will appear here once they are set up.</p></div>
+</div>
+<footer>Himalayan Hack Club, Himalaya Public School, Rohini</footer>
+</main>
+<script src="/config.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)};
+function fmt(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h+"h "+m+"m"}
+function show(id){$("loading").hidden=true;$(id).hidden=false}
+function member(u){
+  show("member");$("logout").hidden=false;$("mName").textContent=u.name.split(" ")[0];$("mEmail").textContent=u.email||"";
+  var q=location.search;
+  fetch("/api/dashboard").then(function(r){return r.json()}).then(function(d){
+    if(!d.connected){$("connect").hidden=false;
+      if(d.expired)$("connectMsg").textContent="Your Hackatime connection expired. Please connect again.";
+      if(q.indexOf("ht=error")>-1)$("connectMsg").textContent="Connecting Hackatime failed. Please try again.";return}
+    $("stats").hidden=false;$("sTotal").textContent=fmt(d.totalSeconds);$("sWeek").textContent=fmt(d.weekSeconds);
+    $("sStreak").textContent=d.streak;$("sActive").textContent=d.activeCount;
+    var box=$("projects");
+    if(!d.projects.length){box.innerHTML='<p class="mute">No projects yet. Install Hackatime in your editor and start coding.</p>';return}
+    d.projects.forEach(function(p){
+      var c=document.createElement("div");c.className="card proj";
+      var l=document.createElement("div"),h=document.createElement("h3"),m=document.createElement("p");
+      h.textContent=p.name;m.className="mute";m.textContent=(p.languages.join(", ")||"No languages yet")+(p.last?" | last active "+new Date(p.last).toLocaleDateString():"");
+      l.appendChild(h);l.appendChild(m);
+      var r=document.createElement("div"),t=document.createElement("span");t.className="tag"+(p.active?" on":"");t.textContent=p.active?"Active":"Idle";
+      var tm=document.createElement("b");tm.textContent=" "+fmt(p.seconds);r.appendChild(t);r.appendChild(tm);
+      c.appendChild(l);c.appendChild(r);box.appendChild(c);
+    });
+  }).catch(function(){$("connect").hidden=false;$("connectMsg").textContent="Could not load your data. Please try again later."});
+}
+function staff(){
+  var key=(window.CLUB_CONFIG||{}).CLERK_KEY||"";
+  if(!key||key.indexOf("PASTE")>-1)return show("guest");
+  var host=atob(key.split("_")[2]).slice(0,-1),s=document.createElement("script");
+  s.async=true;s.crossOrigin="anonymous";s.setAttribute("data-clerk-publishable-key",key);
+  s.src="https://"+host+"/npm/@clerk/clerk-js@5/dist/clerk.browser.js";
+  s.onload=function(){window.Clerk.load().then(function(){
+    var u=window.Clerk.user;if(!u)return show("guest");
+    show("staff");$("stName").textContent=u.firstName||"staff";$("stEmail").textContent=u.primaryEmailAddress?u.primaryEmailAddress.emailAddress:"";
+    $("logout").hidden=false;$("logout").addEventListener("click",function(e){e.preventDefault();window.Clerk.signOut().then(function(){location.href="/"})});
+  })};
+  s.onerror=function(){show("guest")};document.head.appendChild(s);
+}
+fetch("/api/me").then(function(r){return r.json()}).then(function(u){u&&u.name?member(u):staff()}).catch(function(){show("guest")});
+</script></body></html>

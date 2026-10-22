@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Himalayan Hack Club | Himalaya Public School, Rohini</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--red:#ec3750;--bg:#fff;--ink:#1f2d3d;--mute:#5a6b7d;--card:#f3f6f9;--line:#e0e6ed;--dark:#1f2d3d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#17212b;--ink:#f3f6f9;--mute:#a3b1c2;--card:#202d3b;--line:#2f3f52;--dark:#0f161d}}
+:root[data-theme="dark"]{--bg:#17212b;--ink:#f3f6f9;--mute:#a3b1c2;--card:#202d3b;--line:#2f3f52;--dark:#0f161d}
+html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55;font-size:17px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+h1,h2,h3{line-height:1.05;margin:0}
+h2{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;margin-bottom:12px}
+.lead{color:var(--mute);max-width:60ch;margin:0 0 36px}
+.btn{display:inline-block;background:var(--red);color:#fff;font-weight:800;text-decoration:none;padding:14px 26px;border-radius:99px;border:0;font:inherit;font-weight:800;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:rotate(-2deg) scale(1.05)}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:2px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px;gap:12px}
+.logo{font-weight:800;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo i{width:28px;height:28px;background:var(--red);border-radius:8px;display:grid;place-items:center;color:#fff;font-style:normal;font-size:15px}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-weight:600;color:var(--mute)}nav a:hover{color:var(--red)}
+.hero{background:var(--dark);color:#f3f6f9;padding:80px 0 90px;position:relative;overflow:hidden}
+.flag{position:absolute;top:0;left:20px;background:var(--red);color:#fff;font-weight:800;font-size:13px;padding:10px 14px 22px;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
+.hero .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);font-weight:800;letter-spacing:-.03em}
+.hero h1 span{color:var(--red)}
+.hero p{font-size:1.2rem;color:#c5d1de;max-width:46ch;margin:20px 0 28px}
+.hero .btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero .btn.ghost{color:#fff;border-color:#fff}
+.code{background:#0b1117;border-radius:16px;padding:18px 20px;font:14px/1.7 ui-monospace,Menlo,Consolas,monospace;color:#c5d1de;transform:rotate(2deg);box-shadow:8px 8px 0 var(--red);overflow-x:auto}
+.code b{color:#ff8c37;font-weight:400}.code u{color:#33d6a6;text-decoration:none}.code em{color:#5b6b7c;font-style:normal}
+.cursor{display:inline-block;width:9px;height:1em;background:var(--red);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:var(--card);border-radius:18px;padding:24px;border:2px solid var(--line)}
+.card h3{font-size:1.25rem;margin-bottom:8px}
+.card p{margin:0;color:var(--mute)}
+.alt{background:var(--card)}
+.alt .card{background:var(--bg)}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.member{text-align:center}
+.avatar{width:96px;height:96px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:2rem;font-weight:800;color:#fff}
+.member h3{font-size:1.1rem}.member p{margin:4px 0 0;color:var(--mute);font-size:.95rem}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.shot{aspect-ratio:4/3;border-radius:18px;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:800;position:relative;overflow:hidden}
+.shot:nth-child(1){grid-column:span 2;aspect-ratio:auto;min-height:220px}
+.shot small{display:block;font-weight:400;opacity:.85}
+.events{display:grid;gap:12px}
+.event{display:grid;grid-template-columns:90px 1fr auto;gap:18px;align-items:center;background:var(--bg);border:2px solid var(--line);border-radius:18px;padding:16px 20px}
+.date{background:var(--red);color:#fff;border-radius:12px;text-align:center;padding:8px;font-weight:800;line-height:1.1}
+.date span{display:block;font-size:1.7rem}
+.event h3{font-size:1.15rem}.event p{margin:2px 0 0;color:var(--mute)}
+.tag{font-size:.85rem;font-weight:600;background:var(--card);padding:6px 12px;border-radius:99px}
+details{background:var(--card);border-radius:14px;margin-bottom:10px;padding:0 20px;border:2px solid var(--line)}
+summary{cursor:pointer;font-weight:800;padding:18px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--red);font-size:1.4rem;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{margin:0 0 18px;color:var(--mute)}
+.cta{background:var(--red);color:#fff;text-align:center;border-radius:28px;padding:56px 24px}
+.cta .btn{background:#fff;color:var(--red);margin-top:18px}
+.cta p{margin:12px auto 0;max-width:46ch}
+footer{background:var(--dark);color:#c5d1de;padding:48px 0 32px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+footer h3{color:#fff;font-size:1rem;margin-bottom:10px}
+footer ul{list-style:none;margin:0;padding:0}footer li{margin-bottom:6px}
+footer a{text-decoration:none}footer a:hover{color:var(--red)}
+.copy{border-top:1px solid #2f3f52;margin-top:30px;padding-top:18px;font-size:.9rem;color:#8a9bb0}
+dialog{border:0;border-radius:24px;padding:0;width:min(480px,calc(100% - 28px));max-height:calc(100% - 28px);background:var(--bg);color:var(--ink);box-shadow:10px 10px 0 var(--red)}
+dialog::backdrop{background:rgba(15,22,29,.75);backdrop-filter:blur(3px)}
+dialog[open]{animation:pop .22s ease-out}
+@keyframes pop{from{transform:translateY(14px) scale(.97);opacity:0}}
+.dlg{padding:28px 26px 26px;position:relative}
+.dlg h2{font-size:1.9rem;margin-bottom:6px}
+.dlg .x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:1.3rem;line-height:1;cursor:pointer}
+.dlg .x:hover{border-color:var(--red);color:var(--red)}
+.dlg p.sub{margin:0 0 18px;color:var(--mute);font-size:.98rem}
+.dlg label{display:block;font-weight:600;font-size:.95rem;margin:12px 0 5px}
+.dlg input,.dlg select,.dlg textarea{width:100%;font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:12px;padding:11px 14px}
+.dlg input:focus,.dlg select:focus,.dlg textarea:focus{outline:none;border-color:var(--red)}
+.dlg textarea{min-height:84px;resize:vertical}
+.dlg .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dlg .btn{width:100%;margin-top:20px;text-align:center}
+.dlg pre{white-space:pre-wrap;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace;margin:14px 0 0}
+.dlg [hidden]{display:none}
+.dd{position:relative}.dd-menu{position:absolute;right:0;top:calc(100% + 10px);background:var(--bg);border:2px solid var(--line);border-radius:14px;min-width:240px;padding:6px;display:none;box-shadow:6px 6px 0 var(--red);z-index:20}
+.dd.open .dd-menu{display:block}
+.dd-menu a,.dd-menu button,#ddBtn{font-size:1rem;font-weight:600;line-height:1.2;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 16px!important}
+.dd-menu span{word-break:break-word;display:block;width:100%;text-align:left;padding:10px 12px;border:0;background:none;color:var(--ink);font:inherit;font-weight:600;border-radius:8px;cursor:pointer;text-decoration:none}
+.dd-menu span{cursor:default;color:var(--mute);font-weight:400;font-size:.9rem}
+.dd-menu a:hover,.dd-menu button:hover{background:var(--card);color:var(--red)}
+@media(max-width:560px){.nav>.join{display:none}.logo{font-size:.95rem}}
+@media(max-width:760px){nav ul{display:none}.hero .grid{grid-template-columns:1fr}.shot:nth-child(1){grid-column:auto}.event{grid-template-columns:70px 1fr}.event .tag{display:none}footer .cols{grid-template-columns:1fr}.flag{display:none}section{padding:56px 0}}
+@media(prefers-reduced-motion:reduce){.cursor{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#top"><i>&lt;/&gt;</i> Himalayan Hack Club</a>
+<nav aria-label="Main"><ul>
+<li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li>
+</ul></nav>
+<div class="dd" id="loginDd"><button class="btn ghost" id="ddBtn" type="button" aria-haspopup="true" aria-expanded="false" style="padding:10px 18px">Login &#9662;</button>
+<div class="dd-menu" id="ddMenu"><a href="/api/hc-login">Member login (Hack Club)</a><button id="leadLogin" type="button">Lead / staff login</button></div></div>
+<a class="btn join" href="#">Join now</a>
+</div></header>
+
+<main id="top">
+<div class="hero"><div class="flag">Official<br>Hack Club<br>chapter</div>
+<div class="wrap grid">
+<div>
+<h1>Himalayan <span>Hack Club</span></h1>
+<p>A student coding club at Himalaya Public School, Rohini. We build real things, ship them, and have fun doing it.</p>
+<div class="btns"><a class="btn join" href="#">Join now</a><a class="btn ghost" href="#about">See what we do</a></div>
+</div>
+<div class="code" aria-hidden="true"><em># himalayan_hack_club.py</em><br><b>def</b> <u>welcome</u>(you):<br>&nbsp;&nbsp;<b>return</b> "Build something. Ship it."<br><br>club = {<br>&nbsp;&nbsp;"school": "Himalaya Public School",<br>&nbsp;&nbsp;"where": "D-12, Sector 7, Rohini",<br>&nbsp;&nbsp;"open_to": "everyone"<br>}<br><u>print</u>(welcome(<b>"you"</b>))<span class="cursor"></span></div>
+</div></div>
+
+<section id="about"><div class="wrap">
+<h2>About the club</h2>
+<p class="lead">Himalayan Hack Club is an official chapter of Hack Club, the global nonprofit network of teen coders. Beginners are welcome. You learn by making things, not by sitting through lectures.</p>
+<div class="cards">
+<div class="card"><h3>Learn by building</h3><p>Start from zero with websites, games and Python. Every session ends with something that runs.</p></div>
+<div class="card"><h3>Ship real projects</h3><p>We put projects online so friends, family and teachers can actually use them.</p></div>
+<div class="card"><h3>Part of Hack Club</h3><p>Access to Hack Club's worldwide community, programs and events for teenagers.</p></div>
+<div class="card"><h3>Hackathons</h3><p>We run and join hackathons, where teams build a project in a day or a weekend.</p></div>
+</div></div></section>
+
+<section id="projects" class="alt"><div class="wrap">
+<h2>Projects</h2>
+<p class="lead">Things our members are building.</p>
+<div class="cards">
+<div class="card"><h3>School Event Page</h3><p>A website for the annual day with schedule and registrations.</p></div>
+<div class="card"><h3>Quiz Bot</h3><p>A Python bot that quizzes you on class topics.</p></div>
+<div class="card"><h3>Snake Remix</h3><p>A browser game with new power-ups, built in JavaScript.</p></div>
+<div class="card"><h3>Study Timer</h3><p>A simple focus timer for exam season.</p></div>
+</div></div></section>
+
+<section id="events"><div class="wrap">
+<h2>Meetings and events</h2>
+<p class="lead">We meet at school during computer lab hours.</p>
+<div class="events">
+<div class="event"><div class="date">Oct<span>26</span></div><div><h3>Workshop: Intro to Hack Club</h3><p>Monday, 26 October at the Senior Computer Lab, 2nd floor. Learn what the club is, what we build, and how to get started.</p></div><span class="tag">Workshop</span></div>
+<div class="event"><div class="date">Oct<span>31</span></div><div><h3>Saturday session</h3><p>Saturday, 31 October at the Senior Computer Lab, 2nd floor. Topic to be announced.</p></div><span class="tag">Topic TBD</span></div>
+</div></div></section>
+
+<section id="team" class="alt"><div class="wrap">
+<h2>Meet the team</h2>
+<p class="lead">The student leaders and faculty who run the club, nominated by the school.</p>
+<div class="team">
+<div class="member"><div class="avatar" style="background:#ec3750">SK</div><h3>Shaswat Kumar</h3><p>Founder &amp; Club Lead</p></div>
+<div class="member"><div class="avatar" style="background:#a633d6">MS</div><h3>Manan Singla</h3><p>Co-founder &amp; Junior Prefect, Class 8</p></div>
+<div class="member"><div class="avatar" style="background:#338eda">HG</div><h3>Himank Gupta</h3><p>Senior Prefect, Class 12</p></div>
+<div class="member"><div class="avatar" style="background:#ff8c37">P</div><h3>Pushkar</h3><p>Senior Prefect, Class 12</p></div>
+<div class="member"><div class="avatar" style="background:#33a37a">PJ</div><h3>Ms. Priyanka Jain</h3><p>Faculty Advisor</p></div>
+<div class="member"><div class="avatar" style="background:#1f2d3d;border:2px solid var(--red)">PN</div><h3>Ms. Priyanka Negi</h3><p>Head of Department, IT</p></div>
+</div></div></section>
+
+<section id="gallery"><div class="wrap">
+<h2>Gallery</h2>
+<p class="lead">Moments from our sessions and events.</p>
+<div class="gallery">
+<div class="shot" style="background:linear-gradient(135deg,#ec3750,#ff8c37)"><div>First meeting</div></div>
+<div class="shot" style="background:#338eda"><div>Workshop</div></div>
+<div class="shot" style="background:#1f2d3d"><div>Hackathon</div></div>
+<div class="shot" style="background:#a633d6"><div>Demo day</div></div>
+<div class="shot" style="background:#33a37a"><div>Team photo</div></div>
+</div></div></section>
+
+<section id="faq" class="alt"><div class="wrap">
+<h2>FAQ</h2>
+<p class="lead">Quick answers before you join.</p>
+<details><summary>Do I need to know coding already?</summary><p>No. Most members start with zero experience. We begin with the basics.</p></details>
+<details><summary>Who can join?</summary><p>Students of Himalaya Public School. Check with the club leaders about other schools.</p></details>
+<details><summary>Does it cost anything?</summary><p>No. Joining the club is free.</p></details>
+<details><summary>Do I need my own laptop?</summary><p>It helps, but you can pair up with a teammate if you don't have one.</p></details>
+<details><summary>How do I join?</summary><p>Press "Join now" and fill in the form. We will contact you with the next meeting details.</p></details>
+</div></section>
+
+<section><div class="wrap"><div class="cta">
+<h2>Ready to build something?</h2>
+<p>Fill in the form and come to our next meeting. No experience needed.</p>
+<a class="btn join" href="#">Join now</a>
+</div></div></section>
+</main>
+
+<footer><div class="wrap">
+<div class="cols">
+<div><h3>Himalayan Hack Club</h3><p>A coding club at Himalaya Public School, D-12, Sector 7, Rohini, Delhi. An official chapter of <a href="https://hackclub.com" target="_blank" rel="noopener"><u>Hack Club</u></a>.</p></div>
+<div><h3>Explore</h3><ul><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+<div><h3>Contact</h3><ul><li>Faculty Advisor: Ms. Priyanka Jain</li><li><a href="mailto:team@himalayanhackclub.xyz">team@himalayanhackclub.xyz</a></li><li><a href="#">Instagram</a></li><li><a href="#">Join now</a></li></ul></div>
+</div>
+<div class="copy">&copy; 2026 Himalayan Hack Club. Himalaya Public School, Rohini. Not an official Hack Club HQ website.</div>
+</div></footer>
+
+<dialog id="joinDlg" aria-labelledby="joinTitle"><div class="dlg">
+<button class="x" type="button" aria-label="Close" data-close>&times;</button>
+<div id="joinFormWrap">
+<h2 id="joinTitle">Join the club</h2>
+<p class="sub">Tell us a bit about you. No coding experience needed.</p>
+<form id="joinForm">
+<label for="jName">Full name</label><input id="jName" required autocomplete="name">
+<div class="row"><div><label for="jClass">Class and section</label><input id="jClass" placeholder="8 B" required></div>
+<div><label for="jLevel">Coding level</label><select id="jLevel"><option>Complete beginner</option><option>Some experience</option><option>Experienced</option></select></div></div>
+<label for="jEmail">Email or phone</label><input id="jEmail" required autocomplete="email">
+<label for="jWhy">What do you want to build?</label><textarea id="jWhy"></textarea>
+<button class="btn" type="submit">Send my request</button>
+</form></div>
+<div id="joinDone" hidden>
+<h2>You're on the list</h2>
+<p class="sub" id="doneMsg">Copy your details below and send them to a club leader, or show them at the next meeting.</p>
+<pre id="doneText"></pre>
+<button class="btn" type="button" id="copyBtn">Copy details</button>
+<button class="btn ghost" type="button" data-close>Close</button>
+</div>
+</div></dialog>
+
+<script>
+// When your Google Form is ready, paste its link here. Join buttons will then open it instead of the pop-up.
+var JOIN_URL = "https://forms.fillout.com/t/7W5QR9eCoBus";
+// Optional: a club email. If set, the pop-up form opens an email with the details filled in.
+var CLUB_EMAIL = "team@himalayanhackclub.xyz";
+
+var dlg = document.getElementById("joinDlg"), form = document.getElementById("joinForm");
+var wrap = document.getElementById("joinFormWrap"), done = document.getElementById("joinDone");
+var lastBtn = null;
+var dbp = (window.claude && window.claude.use) ? window.claude.use("db").catch(function(){ return null; }) : Promise.resolve(null);
+
+document.querySelectorAll(".join").forEach(function(a){
+  a.href = JOIN_URL;
+  if (JOIN_URL !== "#") { a.target = "_blank"; a.rel = "noopener"; return; }
+  a.addEventListener("click", function(e){
+    e.preventDefault(); lastBtn = a;
+    wrap.hidden = false; done.hidden = true;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    document.getElementById("jName").focus();
+  });
+});
+
+dlg.addEventListener("click", function(e){
+  if (e.target === dlg || e.target.hasAttribute("data-close")) dlg.close();
+});
+dlg.addEventListener("close", function(){ if (lastBtn) lastBtn.focus(); });
+
+form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var g = function(id){ return document.getElementById(id).value.trim(); };
+  var text = "Himalayan Hack Club: join request\nName: " + g("jName") + "\nClass: " + g("jClass") +
+    "\nLevel: " + g("jLevel") + "\nContact: " + g("jEmail") + "\nWants to build: " + (g("jWhy") || "-");
+  document.getElementById("doneText").textContent = text;
+  wrap.hidden = true; done.hidden = false;
+  var rec = {name:g("jName"), classSection:g("jClass"), level:g("jLevel"), contact:g("jEmail"), why:g("jWhy"), createdAt:new Date().toISOString()};
+  dbp.then(function(db){ if (!db) throw new Error("no db"); return db.collection("joinRequests").add(rec); })
+    .then(function(){ if (!CLUB_EMAIL) document.getElementById("doneMsg").textContent = "Your request is saved with the club. You can also copy the details below for a club leader."; })
+    .catch(function(){});
+  if (CLUB_EMAIL) {
+    document.getElementById("doneMsg").textContent = "Your email app should open with these details. Press send to finish.";
+    window.location.href = "mailto:" + CLUB_EMAIL + "?subject=" + encodeURIComponent("Join request: " + g("jName")) + "&body=" + encodeURIComponent(text);
+  }
+  form.reset();
+});
+
+document.getElementById("copyBtn").addEventListener("click", function(){
+  var b = this;
+  try { navigator.clipboard.writeText(document.getElementById("doneText").textContent).then(function(){ b.textContent = "Copied"; }); }
+  catch (err) { b.textContent = "Select the text above and copy it"; }
+});
+</script>
+<script src="/config.js"></script>
+<script>
+(function(){
+var CLERK_KEY = (window.CLUB_CONFIG||{}).CLERK_KEY || "PASTE";
+var dd=document.getElementById("loginDd"), btn=document.getElementById("ddBtn"), menu=document.getElementById("ddMenu");
+function setOpen(o){dd.classList.toggle("open",o);btn.setAttribute("aria-expanded",o)}
+btn.addEventListener("click",function(e){e.stopPropagation();setOpen(!dd.classList.contains("open"))});
+document.addEventListener("click",function(e){if(!dd.contains(e.target))setOpen(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")setOpen(false)});
+function short(n){n=String(n||"Member");if(n.indexOf("@")>-1)n=n.split("@")[0];return n.split(" ")[0];}
+function showUser(name,role,out){
+  btn.textContent=short(name)+" \u25BE";
+  menu.innerHTML="";
+  var s=document.createElement("span");s.textContent="Signed in as "+role+": "+name;menu.appendChild(s);
+  var dl=document.createElement("a");dl.href="/dashboard.html";dl.textContent="My dashboard";menu.appendChild(dl);
+  out.textContent="Log out";menu.appendChild(out);
+}
+fetch("/api/me").then(function(r){return r.json()}).then(function(u){
+  if(u&&u.name){var a=document.createElement("a");a.href="/api/logout";showUser(u.name,"member",a);}
+}).catch(function(){});
+var keySet=CLERK_KEY.indexOf("PASTE")===-1;
+function loadClerk(cb){
+  if(window.Clerk&&window.Clerk.loaded)return cb();
+  var host=atob(CLERK_KEY.split("_")[2]).slice(0,-1);
+  var s=document.createElement("script");s.async=true;s.crossOrigin="anonymous";
+  s.setAttribute("data-clerk-publishable-key",CLERK_KEY);
+  s.src="https://"+host+"/npm/@clerk/clerk-js@5/dist/clerk.browser.js";
+  s.onload=function(){window.Clerk.load().then(cb)};document.head.appendChild(s);
+}
+function clerkUi(){
+  var C=window.Clerk;
+  if(C.user){var b=document.createElement("button");b.type="button";b.addEventListener("click",function(){C.signOut().then(function(){location.reload()})});
+    showUser(C.user.firstName||C.user.primaryEmailAddress.emailAddress,"lead",b);}
+}
+if(keySet)loadClerk(clerkUi);
+document.getElementById("leadLogin").addEventListener("click",function(){
+  if(!keySet){alert("Lead login is not set up yet. Add the Clerk publishable key.");return;}
+  loadClerk(function(){window.Clerk.openSignIn({afterSignInUrl:location.href})});
+});
+})();
+</script>
+</body>
+</html>
