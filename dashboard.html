@@ -54,7 +54,7 @@ function show(id){$("loading").hidden=true;$(id).hidden=false}
 function member(u){
   show("member");$("logout").hidden=false;$("mName").textContent=u.name.indexOf("@")>-1?u.name.split("@")[0]:u.name.split(" ")[0];$("mEmail").textContent=u.email||"";
   var q=location.search;
-  fetch("/api/dashboard").then(function(r){return r.json()}).then(function(d){
+  fetch("/api/stats").then(function(r){return r.json()}).then(function(d){
     if(!d.connected){$("connect").hidden=false;
       if(d.expired)$("connectMsg").textContent="Your Hackatime connection expired. Please connect again.";
       if(d.message)$("connectMsg").textContent=d.message;

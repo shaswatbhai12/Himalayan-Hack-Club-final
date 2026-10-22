@@ -6,7 +6,7 @@ try {
     if (m && !l.trim().startsWith("#")) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
   });
 } catch (e) { console.log("No .env file found. Copy .env.example to .env first."); }
-const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/dashboard": "dashboard" };
+const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/stats": "stats" };
 http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://localhost:3000");
   res.status = (c) => { res.statusCode = c; return res; };
