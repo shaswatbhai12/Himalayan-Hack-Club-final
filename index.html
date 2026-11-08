@@ -46,6 +46,21 @@ nav a{text-decoration:none;font-weight:600;color:var(--mute)}nav a:hover{color:v
 .card{background:var(--card);border-radius:18px;padding:24px;border:2px solid var(--line)}
 .card h3{font-size:1.25rem;margin-bottom:8px}
 .card p{margin:0;color:var(--mute)}
+.sponsors{background:var(--dark);color:#f3f6f9;overflow:hidden}
+.sponsors .lead{color:#c5d1de}
+.sponsors-kicker{display:inline-block;color:#ff8c37;font-size:.82rem;font-weight:800;letter-spacing:.12em;margin-bottom:14px}
+.sponsor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.sponsor{min-height:150px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:#273746;border:2px solid #405265;border-radius:18px;padding:22px;transition:transform .15s,border-color .15s}
+.sponsor:hover{transform:translateY(-4px);border-color:var(--red)}
+.sponsor-mark{width:54px;height:54px;display:grid;place-items:center;border-radius:15px;background:var(--red);color:#fff;font-size:1.15rem;font-weight:800;margin-bottom:12px}
+.sponsor h3{font-size:1.15rem;margin:0 0 4px}
+.sponsor p{color:#c5d1de;margin:0;font-size:.95rem}
+.sponsor-grid .sponsor:nth-child(1){transform:rotate(-1.5deg)}
+.sponsor-grid .sponsor:nth-child(2){transform:rotate(1.5deg)}
+.sponsor-grid .sponsor:nth-child(3){transform:rotate(-1deg)}
+.sponsor-grid .sponsor:nth-child(1):hover,.sponsor-grid .sponsor:nth-child(2):hover,.sponsor-grid .sponsor:nth-child(3):hover{transform:translateY(-4px) rotate(0)}
+.sponsor.cta-sponsor{background:transparent;border-style:dashed}
+.sponsor.cta-sponsor .sponsor-mark{background:transparent;border:2px solid var(--red);color:var(--red)}
 .alt{background:var(--card)}
 .alt .card{background:var(--bg)}
 .team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
@@ -108,7 +123,7 @@ dialog[open]{animation:pop .22s ease-out}
 <header><div class="wrap nav">
 <a class="logo" href="#top"><i>&lt;/&gt;</i> Himalayan Hack Club</a>
 <nav aria-label="Main"><ul>
-<li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li>
+<li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#sponsors">Sponsors</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li>
 </ul></nav>
 <div class="dd" id="loginDd"><button class="btn ghost" id="ddBtn" type="button" aria-haspopup="true" aria-expanded="false" style="padding:10px 18px">Login &#9662;</button>
 <div class="dd-menu" id="ddMenu"><a href="/api/hc-login">Member login (Hack Club)</a><button id="leadLogin" type="button">Lead / staff login</button></div></div>
@@ -144,6 +159,22 @@ dialog[open]{animation:pop .22s ease-out}
 <div class="card"><h3>Quiz Bot</h3><p>A Python bot that quizzes you on class topics.</p></div>
 <div class="card"><h3>Snake Remix</h3><p>A browser game with new power-ups, built in JavaScript.</p></div>
 <div class="card"><h3>Study Timer</h3><p>A simple focus timer for exam season.</p></div>
+</div></div></section>
+
+<section id="sponsors" class="sponsors"><div class="wrap">
+<span class="sponsors-kicker">BUILT WITH THE COMMUNITY</span>
+<h2>Back student builders.</h2>
+<p class="lead">Hack Club showed us that teenagers can build incredible things when someone gives them the space, tools and encouragement to start.</p>
+<div class="sponsor-grid">
+<a class="sponsor" href="https://hackclub.com" target="_blank" rel="noopener">
+<div class="sponsor-mark">&lt;/&gt;</div><h3>Hack Club</h3><p>The community that inspired us</p>
+</a>
+<a class="sponsor" href="https://himalayapublicschool.com/" target="_blank" rel="noopener">
+<div class="sponsor-mark">HP</div><h3>Himalaya Public School</h3><p>Our host school</p>
+</a>
+<a class="sponsor cta-sponsor" href="mailto:team@himalayanhackclub.xyz?subject=Himalayan%20Hack%20Club%20sponsorship">
+<div class="sponsor-mark">+</div><h3>Become a sponsor</h3><p>Help students build and ship</p>
+</a>
 </div></div></section>
 
 <section id="events"><div class="wrap">
@@ -197,7 +228,7 @@ dialog[open]{animation:pop .22s ease-out}
 <footer><div class="wrap">
 <div class="cols">
 <div><h3>Himalayan Hack Club</h3><p>A coding club at Himalaya Public School, D-12, Sector 7, Rohini, Delhi. An official chapter of <a href="https://hackclub.com" target="_blank" rel="noopener"><u>Hack Club</u></a>.</p></div>
-<div><h3>Explore</h3><ul><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+<div><h3>Explore</h3><ul><li><a href="#about">About</a></li><li><a href="#projects">Projects</a></li><li><a href="#events">Events</a></li><li><a href="#sponsors">Sponsors</a></li><li><a href="#team">Team</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#faq">FAQ</a></li></ul></div>
 <div><h3>Contact</h3><ul><li>Faculty Advisor: Ms. Priyanka Jain</li><li><a href="mailto:team@himalayanhackclub.xyz">team@himalayanhackclub.xyz</a></li><li><a href="#">Instagram</a></li><li><a href="#">Join now</a></li></ul></div>
 </div>
 <div class="copy">&copy; 2026 Himalayan Hack Club. Himalaya Public School, Rohini. Not an official Hack Club HQ website.</div>
