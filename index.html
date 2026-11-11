@@ -378,7 +378,7 @@ function clerkUi(){
 if(keySet)loadClerk(clerkUi);
 document.getElementById("leadLogin").addEventListener("click",function(){
   if(!keySet){alert("Lead login is not set up yet. Add the Clerk publishable key.");return;}
-  loadClerk(function(){window.Clerk.openSignIn({afterSignInUrl:location.origin+"/admin.html"})});
+  loadClerk(function(){window.Clerk.openSignIn({afterSignInUrl:location.origin+"/manage.html"})});
 });
 })();
 </script>
