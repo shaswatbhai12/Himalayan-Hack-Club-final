@@ -13,11 +13,19 @@ Optional: HC_CLIENT_ID, HC_REDIRECT_URI (defaults are already set in the code)
 
 ## 3. Clerk (lead / staff)
 - Create an app at clerk.com, copy the Publishable Key (starts with pk_)
-- Paste it into CLERK_KEY near the bottom of index.html
+- Paste it into `config.js` as `CLERK_KEY`
+- Add the Clerk Secret Key to Vercel and `.env` as `CLERK_SECRET_KEY`
 - In Clerk > User & Authentication, turn OFF public sign-up and invite leads by email, so only invited people can log in
 - Add your site domain under Clerk's allowed origins/domains
 
-## 4. Redeploy, then test both logins from the Login dropdown.
+## 4. Clerk admin events
+- Add `CLERK_SECRET_KEY` to Vercel and `.env` using the secret key from Clerk.
+- Add `DATABASE_URL` to Vercel and `.env` using the Neon connection string for the events database.
+- The database table is `events`; only Clerk users with an email ending in `@himalayanhackclub.xyz` can create, edit, or delete events.
+- Open `/admin.html` from the Lead / staff login button. Visitors can read events on the home page but cannot change them.
+- The same admin dashboard manages sponsors. Sponsor records are stored in the `sponsors` table and support a name, website, description, logo URL, accent color, and display order.
+
+## 5. Redeploy, then test both logins from the Login dropdown.
 
 ## Run on localhost first
 1. Install Node.js 18 or newer (nodejs.org).

@@ -114,10 +114,12 @@ dialog[open]{animation:pop .22s ease-out}
 .dd{position:relative}.dd-menu{position:absolute;right:0;top:calc(100% + 10px);background:var(--bg);border:2px solid var(--line);border-radius:14px;min-width:240px;padding:6px;display:none;box-shadow:6px 6px 0 var(--red);z-index:20}
 .dd.open .dd-menu{display:block}
 .dd-menu a,.dd-menu button,#ddBtn{font-size:1rem;font-weight:600;line-height:1.2;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:8px 16px!important}
+.dd-menu a,.dd-menu button{display:block;width:100%;max-width:none;text-align:left}
 .dd-menu span{word-break:break-word;display:block;width:100%;text-align:left;padding:10px 12px;border:0;background:none;color:var(--ink);font:inherit;font-weight:600;border-radius:8px;cursor:pointer;text-decoration:none}
 .dd-menu span{cursor:default;color:var(--mute);font-weight:400;font-size:.9rem}
 .dd-menu a:hover,.dd-menu button:hover{background:var(--card);color:var(--red)}
-@media(max-width:560px){.nav>.join{display:none}.logo{font-size:.95rem}}
+@media(max-width:1100px){nav ul{display:none}.nav>.join{display:none}}
+@media(max-width:560px){.logo{font-size:.95rem}}
 @media(max-width:760px){nav ul{display:none}.hero .grid{grid-template-columns:1fr}.shot:nth-child(1){grid-column:auto}.event{grid-template-columns:70px 1fr}.event .tag{display:none}footer .cols{grid-template-columns:1fr}.flag{display:none}section{padding:56px 0}}
 @media(prefers-reduced-motion:reduce){.cursor{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
 </style>
@@ -169,15 +171,7 @@ dialog[open]{animation:pop .22s ease-out}
 <h2>Back student builders.</h2>
 <p class="lead">Hack Club showed us that teenagers can build incredible things when someone gives them the space, tools and encouragement to start.</p>
 <div class="sponsor-grid">
-<a class="sponsor" href="https://hackclub.com" target="_blank" rel="noopener">
-<img class="hackclub-logo" src="https://assets.hackclub.com/flag-standalone.png" alt="Hack Club logo"><h3>Hack Club</h3><p>The community that inspired us</p>
-</a>
-<a class="sponsor" href="https://himalayapublicschool.com/" target="_blank" rel="noopener">
-<img class="sponsor-logo" src="https://himalayapublicschool.com/images/logo.png" alt="Himalaya Public School logo"><h3>Himalaya Public School</h3><p>Our host school</p>
-</a>
-<a class="sponsor xyz-sponsor" href="https://gen.xyz/" target="_blank" rel="noopener">
-<div class="sponsor-mark">.xyz</div><h3>xyz</h3><p>Our domain partner</p>
-</a>
+<div id="sponsorsList" style="display:contents"><p class="lead">Loading sponsors...</p></div>
 <a class="sponsor cta-sponsor" href="mailto:shaswat@himalayanhackclub.xyz?subject=Himalayan%20Hack%20Club%20sponsorship">
 <div class="sponsor-mark">+</div><h3>Become a sponsor</h3><p>Help students build and ship</p>
 </a>
@@ -186,11 +180,8 @@ dialog[open]{animation:pop .22s ease-out}
 <section id="events"><div class="wrap">
 <h2>Meetings and events</h2>
 <p class="lead">We meet at school during computer lab hours.</p>
-<div class="events">
-<div class="event"><div class="date">Oct<span>26</span></div><div><h3>Workshop: Intro to Hack Club</h3><p>Monday, 26 October at the Senior Computer Lab, 2nd floor. Learn what the club is, what we build, and how to get started.</p></div><span class="tag">Workshop</span></div>
-<div class="event"><div class="date">Oct<span>31</span></div><div><h3>Saturday session</h3><p>Saturday, 31 October at the Senior Computer Lab, 2nd floor. Topic to be announced.</p></div><span class="tag">Topic TBD</span></div>
-<div class="event"><div class="date">Dec<span>5</span></div><div><h3>Student Coding Workshop &amp; Hackathon</h3><p>Saturday, 5 December. Location: TBD.</p></div><span class="tag">Workshop</span></div>
-</div></div></section>
+<div class="events" id="eventsList"><p class="lead">Loading events...</p></div>
+</div></section>
 
 <section id="team" class="alt"><div class="wrap">
 <h2>Meet the team</h2>
@@ -268,6 +259,42 @@ dialog[open]{animation:pop .22s ease-out}
 var JOIN_URL = "https://forms.fillout.com/t/7W5QR9eCoBus";
 // Optional: a club email. If set, the pop-up form opens an email with the details filled in.
 var CLUB_EMAIL = "team@himalayanhackclub.xyz";
+
+function loadEvents(){
+  var list=document.getElementById("eventsList");
+  fetch("/api/events").then(function(r){if(!r.ok)throw new Error("events unavailable");return r.json()}).then(function(events){
+    list.innerHTML="";
+    if(!events.length){list.innerHTML='<p class="lead">No upcoming events yet. Check back soon.</p>';return}
+    events.forEach(function(event){
+      var d=new Date(event.date+"T00:00:00"), card=document.createElement("div");
+      card.className="event";
+      var date=document.createElement("div"), day=document.createElement("span");
+      date.className="date";date.textContent=d.toLocaleDateString(undefined,{month:"short"});
+      day.textContent=d.getDate();date.appendChild(day);
+      var info=document.createElement("div"), title=document.createElement("h3"), desc=document.createElement("p");
+      title.textContent=event.title;desc.textContent=d.toLocaleDateString(undefined,{weekday:"long",day:"numeric",month:"long"})+". "+event.description+" Location: "+event.location+".";
+      info.appendChild(title);info.appendChild(desc);
+      var tag=document.createElement("span");tag.className="tag";tag.textContent=event.tag;
+      card.appendChild(date);card.appendChild(info);card.appendChild(tag);list.appendChild(card);
+    });
+  }).catch(function(){list.innerHTML='<p class="lead">Events are temporarily unavailable. Please check back soon.</p>'});
+}
+loadEvents();
+function loadSponsors(){
+  var list=document.getElementById("sponsorsList");
+  fetch("/api/sponsors").then(function(r){if(!r.ok)throw new Error("sponsors unavailable");return r.json()}).then(function(sponsors){
+    list.innerHTML="";
+    if(!sponsors.length){list.innerHTML='<p class="lead">Our sponsor list is coming soon.</p>';return}
+    sponsors.forEach(function(sponsor,index){
+      var link=document.createElement("a"), title=document.createElement("h3"), desc=document.createElement("p");
+      link.className="sponsor"+(index%3===2?" xyz-sponsor":"");link.href=sponsor.url;link.target="_blank";link.rel="noopener";
+      if(sponsor.logoUrl){var logo=document.createElement("img");logo.className="sponsor-logo";logo.src=sponsor.logoUrl;logo.alt=sponsor.name+" logo";link.appendChild(logo)}
+      else {var mark=document.createElement("div");mark.className="sponsor-mark";mark.style.background=sponsor.accent;mark.textContent=sponsor.name.slice(0,3);link.appendChild(mark)}
+      title.textContent=sponsor.name;desc.textContent=sponsor.description;link.appendChild(title);link.appendChild(desc);list.appendChild(link);
+    });
+  }).catch(function(){list.innerHTML='<p class="lead">Sponsors are temporarily unavailable.</p>'});
+}
+loadSponsors();
 
 var dlg = document.getElementById("joinDlg"), form = document.getElementById("joinForm");
 var wrap = document.getElementById("joinFormWrap"), done = document.getElementById("joinDone");
@@ -351,7 +378,7 @@ function clerkUi(){
 if(keySet)loadClerk(clerkUi);
 document.getElementById("leadLogin").addEventListener("click",function(){
   if(!keySet){alert("Lead login is not set up yet. Add the Clerk publishable key.");return;}
-  loadClerk(function(){window.Clerk.openSignIn({afterSignInUrl:location.href})});
+  loadClerk(function(){window.Clerk.openSignIn({afterSignInUrl:location.origin+"/admin.html"})});
 });
 })();
 </script>

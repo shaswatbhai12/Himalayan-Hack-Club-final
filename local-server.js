@@ -7,7 +7,7 @@ try {
   });
 } catch (e) { console.log("No .env file found. Copy .env.example to .env first."); }
 const PORT = process.env.PORT || 3000;
-const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/stats": "stats" };
+const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/stats": "stats", "/api/events": "events", "/api/sponsors": "sponsors" };
 http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://localhost");
   res.status = (c) => { res.statusCode = c; return res; };
@@ -23,7 +23,7 @@ http.createServer(async (req, res) => {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     return res.end(fs.readFileSync(path.join(__dirname, "index.html")));
   }
-  const pages = { "/dashboard.html": ["dashboard.html", "text/html; charset=utf-8"], "/config.js": ["config.js", "application/javascript"] };
+  const pages = { "/dashboard.html": ["dashboard.html", "text/html; charset=utf-8"], "/admin.html": ["admin.html", "text/html; charset=utf-8"], "/config.js": ["config.js", "application/javascript"] };
   if (pages[u.pathname]) {
     res.setHeader("Content-Type", pages[u.pathname][1]);
     return res.end(fs.readFileSync(path.join(__dirname, pages[u.pathname][0])));
