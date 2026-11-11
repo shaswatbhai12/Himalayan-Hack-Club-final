@@ -1,3 +1,8 @@
 {
-  "version": 2
+  "version": 2,
+  "rewrites": [
+    { "source": "/dashboard.html", "destination": "/api/dashboard-page" },
+    { "source": "/manage.html", "destination": "/api/manage-page" },
+    { "source": "/config.js", "destination": "/api/config-js" }
+  ]
 }

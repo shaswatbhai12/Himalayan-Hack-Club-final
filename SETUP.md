@@ -27,7 +27,7 @@ Optional: HC_CLIENT_ID, HC_REDIRECT_URI (defaults are already set in the code)
 
 ## 5. Redeploy, then test both logins from the Login dropdown.
 
-The project intentionally uses Vercel's native handling for root static files and `/api/*` functions. Do not add a custom catch-all route that rewrites every request to `index.html`, because that can hide the dashboard and API routes.
+The project uses explicit rewrites for `dashboard.html`, `manage.html`, and `config.js` because the current Vercel project configuration invokes root assets as functions. Do not add a custom catch-all route that rewrites every request to `index.html`, because that can hide the dashboard and API routes.
 
 ## Run on localhost first
 1. Install Node.js 18 or newer (nodejs.org).
