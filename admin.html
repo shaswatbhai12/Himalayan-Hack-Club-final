@@ -52,7 +52,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:600}l
 <script src="/config.js"></script>
 <script>
 (function(){
-  var $=function(id){return document.getElementById(id)}, key=(window.CLUB_CONFIG||{}).CLERK_KEY||"", editing=null, editingSponsor=null;
+  var $=function(id){return document.getElementById(id)}, key=(window.CLUB_CONFIG||{}).CLERK_KEY||"pk_test_Z3JlYXQtbXVzdGFuZy02NTYyLmNsZXJrLmFjY291bnRzLmRldiQ", editing=null, editingSponsor=null;
   function showLogin(){ $("loginPanel").hidden=false; $("adminPanel").hidden=true; }
   function showAdmin(){ $("loginPanel").hidden=true; $("adminPanel").hidden=false; loadEvents(); loadSponsors(); }
   function loadClerk(){

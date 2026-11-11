@@ -75,7 +75,7 @@ function member(u){
   }).catch(function(){$("connect").hidden=false;$("connectMsg").textContent="Could not load your data. Please try again later."});
 }
 function staff(){
-  var key=(window.CLUB_CONFIG||{}).CLERK_KEY||"";
+  var key=(window.CLUB_CONFIG||{}).CLERK_KEY||"pk_test_Z3JlYXQtbXVzdGFuZy02NTYyLmNsZXJrLmFjY291bnRzLmRldiQ";
   if(!key||key.indexOf("PASTE")>-1)return show("guest");
   var host=atob(key.split("_")[2]).slice(0,-1),s=document.createElement("script");
   s.async=true;s.crossOrigin="anonymous";s.setAttribute("data-clerk-publishable-key",key);

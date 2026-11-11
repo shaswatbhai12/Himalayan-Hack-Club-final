@@ -344,7 +344,7 @@ document.getElementById("copyBtn").addEventListener("click", function(){
 <script src="/config.js"></script>
 <script>
 (function(){
-var CLERK_KEY = (window.CLUB_CONFIG||{}).CLERK_KEY || "PASTE";
+var CLERK_KEY = (window.CLUB_CONFIG||{}).CLERK_KEY || "pk_test_Z3JlYXQtbXVzdGFuZy02NTYyLmNsZXJrLmFjY291bnRzLmRldiQ";
 var dd=document.getElementById("loginDd"), btn=document.getElementById("ddBtn"), menu=document.getElementById("ddMenu");
 function setOpen(o){dd.classList.toggle("open",o);btn.setAttribute("aria-expanded",o)}
 btn.addEventListener("click",function(e){e.stopPropagation();setOpen(!dd.classList.contains("open"))});
