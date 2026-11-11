@@ -1,6 +1,6 @@
 # Himalayan Hack Club: login setup
 
-Files: index.html, api/ (4 small serverless functions). Upload the whole folder to your Vercel project with index.html at the top level.
+Files: static HTML/JavaScript pages at the project root and serverless functions in `api/`. Set the Vercel project Root Directory to this folder, leave the Output Directory empty, and deploy from the branch containing these files.
 
 ## 1. Vercel environment variables (Settings > Environment Variables)
 - HC_CLIENT_SECRET = the Client Secret from auth.hackclub.com/developer/apps (regenerate it if you ever shared it)
@@ -26,6 +26,8 @@ Optional: HC_CLIENT_ID, HC_REDIRECT_URI (defaults are already set in the code)
 - The same admin dashboard manages sponsors. Sponsor records are stored in the `sponsors` table and support a name, website, description, logo URL, accent color, and display order.
 
 ## 5. Redeploy, then test both logins from the Login dropdown.
+
+The project intentionally uses Vercel's native handling for root static files and `/api/*` functions. Do not add a custom catch-all route that rewrites every request to `index.html`, because that can hide the dashboard and API routes.
 
 ## Run on localhost first
 1. Install Node.js 18 or newer (nodejs.org).
