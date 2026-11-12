@@ -23,7 +23,7 @@ http.createServer(async (req, res) => {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
     return res.end(fs.readFileSync(path.join(__dirname, "index.html")));
   }
-  const pages = { "/dashboard.html": ["dashboard.html", "text/html; charset=utf-8"], "/manage.html": ["manage.html", "text/html; charset=utf-8"], "/config.js": ["config.js", "application/javascript"] };
+  const pages = { "/dashboard.html": ["dashboard.html", "text/html; charset=utf-8"], "/manage.html": ["manage.html", "text/html; charset=utf-8"], "/config.js": ["config.js", "application/javascript"], "/favicon.svg": ["favicon.svg", "image/svg+xml"] };
   if (pages[u.pathname]) {
     res.setHeader("Content-Type", pages[u.pathname][1]);
     return res.end(fs.readFileSync(path.join(__dirname, pages[u.pathname][0])));
