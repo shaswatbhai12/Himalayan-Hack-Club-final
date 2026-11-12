@@ -8,7 +8,7 @@ Files: static HTML/JavaScript pages at the project root and serverless functions
 Optional: HC_CLIENT_ID, HC_REDIRECT_URI (defaults are already set in the code)
 
 ## 2. Hack Club Auth app
-- Redirect URI: https://himalayan-hack-club2.vercel.app/api/hc-callback
+- Production redirect URI: https://www.himalayanhackclub.xyz/api/hc-callback
 - Scopes: openid, name, email
 
 ## 3. Clerk (lead / staff)
@@ -40,7 +40,7 @@ When you deploy to Vercel, do NOT upload .env. Set the env vars in Vercel instea
 
 ## Dashboard (Hackatime)
 1. Go to https://hackatime.hackclub.com/oauth/applications and create a new application.
-2. Redirect URIs (one per line): http://localhost:3000/api/ht-callback and https://himalayan-hack-club2.vercel.app/api/ht-callback
+2. Redirect URIs (one per line): http://localhost:3000/api/ht-callback and https://www.himalayanhackclub.xyz/api/ht-callback
 3. Scopes: profile and read. Tick "Confidential".
 4. Put its Client ID and Secret into .env as HT_CLIENT_ID and HT_CLIENT_SECRET (and in Vercel env vars when you deploy).
 5. Clerk key now lives in config.js (one place for both pages).

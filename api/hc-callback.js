@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         client_id: process.env.HC_CLIENT_ID || "bc7a26bb94e6c592769d5a40fe80a518",
         client_secret: process.env.HC_CLIENT_SECRET,
-        redirect_uri: process.env.HC_REDIRECT_URI || "https://himalayan-hack-club2.vercel.app/api/hc-callback",
+        redirect_uri: process.env.HC_REDIRECT_URI || "https://www.himalayanhackclub.xyz/api/hc-callback",
         code,
         grant_type: "authorization_code",
       }),

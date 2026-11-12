@@ -5,7 +5,7 @@ module.exports = (req, res) => {
   const state = crypto.randomBytes(16).toString("hex");
   const p = new URLSearchParams({
     client_id: process.env.HT_CLIENT_ID || "",
-    redirect_uri: process.env.HT_REDIRECT_URI || "https://himalayan-hack-club2.vercel.app/api/ht-callback",
+    redirect_uri: process.env.HT_REDIRECT_URI || "https://www.himalayanhackclub.xyz/api/ht-callback",
     response_type: "code",
     scope: "profile read",
     state,
