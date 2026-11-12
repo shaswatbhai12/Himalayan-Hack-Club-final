@@ -58,7 +58,13 @@ function member(u){
   fetch("/api/stats").then(function(r){return r.json()}).then(function(d){
     if(!d.connected){$("connect").hidden=false;
       if(d.expired)$("connectMsg").textContent="Your Hackatime connection expired. Please connect again.";
-      if(d.message)$("connectMsg").textContent=d.message;
+      if(d.message){
+        $("connectMsg").textContent=d.message;
+        if(d.helpUrl){
+          var help=document.createElement("a");help.href=d.helpUrl;help.target="_blank";help.rel="noopener";help.textContent="Fraud Squad";
+          $("connectMsg").appendChild(document.createTextNode(" "));$("connectMsg").appendChild(help);
+        }
+      }
       if(q.indexOf("ht=error")>-1)$("connectMsg").textContent="Connecting Hackatime failed. Please try again.";return}
     $("stats").hidden=false;$("sTotal").textContent=fmt(d.totalSeconds);$("sWeek").textContent=fmt(d.weekSeconds);
     $("sStreak").textContent=d.streak;$("sActive").textContent=d.activeCount;

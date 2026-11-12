@@ -23,9 +23,9 @@ module.exports = async (req, res) => {
     if (me.status === 200) {
       const level = me.d && me.d.trust_factor && me.d.trust_factor.trust_level;
       console.log("[hackatime] trust level:", level || "unknown");
-      return res.json({ connected: false, trust: level || null, message: "Hackatime accepted your login and gave the 'read' permission, but it refuses to share coding stats for this account" + (level ? " (its trust level is '" + level + "')" : "") + ". This usually means the account is restricted or banned. Ask in #hackatime-help on the Hack Club Slack, or test with another member's account." });
+      return res.json({ connected: false, trust: level || null, message: "Hackatime accepted your login and gave the 'read' permission, but it refuses to share coding stats for this account" + (level ? " (its trust level is '" + level + "')" : "") + ". This usually means the account is restricted or banned. Please DM the Fraud Squad on Slack for help:", helpUrl: "https://hackclub.slack.com/team/U091HC53CE8" });
     }
-    return res.json({ connected: false, message: "Hackatime rejected this account's access. The connection may have been revoked, or the Hackatime account may be restricted or banned. Ask in #hackatime-help on the Hack Club Slack, or try a different member's account." });
+    return res.json({ connected: false, message: "Hackatime rejected this account's access. The connection may have been revoked, or the Hackatime account may be restricted or banned. Please DM the Fraud Squad on Slack for help:", helpUrl: "https://hackclub.slack.com/team/U091HC53CE8" });
   }
   if (st.some((s) => s === 401 || s === 403))
     return res.json({ connected: false, message: "Hackatime refused access to your coding data (permission problem). In your Hackatime app make sure the 'read' scope is ticked, then connect again." });
