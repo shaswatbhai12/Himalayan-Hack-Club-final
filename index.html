@@ -183,14 +183,8 @@ dialog[open]{animation:pop .22s ease-out}
 <section id="team" class="alt"><div class="wrap">
 <h2>Meet the team</h2>
 <p class="lead">The student leaders and faculty who run the club, nominated by the school.</p>
-<div class="team">
-<div class="member"><div class="avatar" style="background:#ec3750">SK</div><h3>Shaswat Kumar</h3><p>Founder &amp; Club Lead</p></div>
-<div class="member"><div class="avatar" style="background:#a633d6">MS</div><h3>Manan Singla</h3><p>Co-founder &amp; Junior Prefect, Class 8</p></div>
-<div class="member"><div class="avatar" style="background:#338eda">HG</div><h3>Himank Gupta</h3><p>Senior Prefect, Class 12</p></div>
-<div class="member"><div class="avatar" style="background:#ff8c37">P</div><h3>Pushkar</h3><p>Senior Prefect, Class 12</p></div>
-<div class="member"><div class="avatar" style="background:#33a37a">PJ</div><h3>Ms. Priyanka Jain</h3><p>Faculty Advisor</p></div>
-<div class="member"><div class="avatar" style="background:#1f2d3d;border:2px solid var(--red)">PN</div><h3>Ms. Priyanka Negi</h3><p>Head of Department, IT</p></div>
-</div></div></section>
+<div class="team" id="teamList"><p class="lead">Loading team...</p></div>
+</div></section>
 
 <section id="gallery"><div class="wrap">
 <h2>Gallery</h2>
@@ -292,6 +286,19 @@ function loadSponsors(){
   }).catch(function(){list.innerHTML='<p class="lead">Sponsors are temporarily unavailable.</p>'});
 }
 loadSponsors();
+function loadTeam(){
+  var list=document.getElementById("teamList");
+  fetch("/api/team").then(function(r){if(!r.ok)throw new Error("team unavailable");return r.json()}).then(function(members){
+    list.innerHTML="";
+    if(!members.length){list.innerHTML='<p class="lead">Team details are coming soon.</p>';return}
+    members.forEach(function(member){
+      var card=document.createElement("div"),avatar=document.createElement("div"),title=document.createElement("h3"),role=document.createElement("p");
+      card.className="member";avatar.className="avatar";avatar.style.background=member.accent;avatar.textContent=member.initials;title.textContent=member.name;role.textContent=member.role;
+      card.appendChild(avatar);card.appendChild(title);card.appendChild(role);list.appendChild(card);
+    });
+  }).catch(function(){list.innerHTML='<p class="lead">Team details are temporarily unavailable.</p>'});
+}
+loadTeam();
 
 var dlg = document.getElementById("joinDlg"), form = document.getElementById("joinForm");
 var wrap = document.getElementById("joinFormWrap"), done = document.getElementById("joinDone");

@@ -7,7 +7,7 @@ try {
   });
 } catch (e) { console.log("No .env file found. Copy .env.example to .env first."); }
 const PORT = process.env.PORT || 3000;
-const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/stats": "stats", "/api/events": "events", "/api/sponsors": "sponsors" };
+const routes = { "/api/hc-login": "hc-login", "/api/hc-callback": "hc-callback", "/api/me": "me", "/api/logout": "logout", "/api/ht-login": "ht-login", "/api/ht-callback": "ht-callback", "/api/stats": "stats", "/api/events": "events", "/api/sponsors": "sponsors", "/api/team": "team" };
 http.createServer(async (req, res) => {
   const u = new URL(req.url, "http://localhost");
   res.status = (c) => { res.statusCode = c; return res; };

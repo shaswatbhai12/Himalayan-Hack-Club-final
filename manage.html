@@ -28,7 +28,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:600}l
 <p class="mute">Only accounts ending in @himalayanhackclub.xyz can manage events.</p>
 <div id="loginPanel" class="panel" hidden><p>You need a staff account to manage events.</p><button class="btn" id="login" type="button">Lead / staff login</button></div>
 <div id="adminPanel" hidden>
-<nav class="panel" aria-label="Admin sections"><b>Manage:</b> <a href="#events">Events</a> · <a href="#sponsors">Sponsors</a></nav>
+<nav class="panel" aria-label="Admin sections"><b>Manage:</b> <a href="#events">Events</a> · <a href="#sponsors">Sponsors</a> · <a href="#team-admin">Team</a></nav>
 <div class="panel" id="events"><h2 id="formTitle">Add an event</h2><form id="eventForm">
 <label>Title<input id="title" maxlength="120" required></label>
 <label>Date<input id="date" type="date" required></label>
@@ -48,6 +48,15 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:600}l
 <div class="form-actions"><button class="btn" type="submit">Save sponsor</button> <button class="btn ghost" id="cancelSponsor" type="button" hidden>Cancel edit</button></div>
 </form></div>
 <h2 id="sponsors">Sponsors</h2><div id="sponsorList"></div>
+<div class="panel" id="team-admin"><h2 id="teamFormTitle">Add a team member</h2><form id="teamForm">
+<label>Name<input id="teamName" maxlength="100" required></label>
+<label>Role<input id="teamRole" maxlength="160" required></label>
+<label>Initials<input id="teamInitials" maxlength="3" pattern="[A-Za-z0-9]{1,3}" required></label>
+<label>Accent color<input id="teamAccent" type="color" value="#ec3750" required></label>
+<label>Display order<input id="teamSortOrder" type="number" value="0" min="0" step="1" required></label>
+<div class="form-actions"><button class="btn" type="submit">Save team member</button> <button class="btn ghost" id="cancelTeam" type="button" hidden>Cancel edit</button></div>
+</form></div>
+<h2>Team members</h2><div id="teamList"></div>
 </div>
 </main>
 <script src="/config.js"></script>
@@ -55,7 +64,7 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:600}l
 (function(){
   var $=function(id){return document.getElementById(id)}, key=(window.CLUB_CONFIG||{}).CLERK_KEY||"pk_test_Z3JlYXQtbXVzdGFuZy02NTYyLmNsZXJrLmFjY291bnRzLmRldiQ", editing=null, editingSponsor=null;
   function showLogin(){ $("loginPanel").hidden=false; $("adminPanel").hidden=true; }
-  function showAdmin(){ $("loginPanel").hidden=true; $("adminPanel").hidden=false; loadEvents(); loadSponsors(); }
+  function showAdmin(){ $("loginPanel").hidden=true; $("adminPanel").hidden=false; loadEvents(); loadSponsors(); loadTeam(); }
   function loadClerk(){
     if(!key||key.indexOf("PASTE")>-1)return showLogin();
     if(window.Clerk)return window.Clerk.load().then(checkUser);
@@ -81,6 +90,13 @@ form{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:600}l
   function deleteSponsor(id){if(!confirm("Delete this sponsor?"))return;request("/api/sponsors?id="+id,{method:"DELETE"}).then(function(){$("status").textContent="Sponsor deleted.";loadSponsors()}).catch(function(e){$("status").textContent=e.message})}
   $("sponsorForm").onsubmit=function(e){e.preventDefault();var data={name:$("sponsorName").value,url:$("sponsorUrl").value,logoUrl:$("sponsorLogoUrl").value,accent:$("sponsorAccent").value,sortOrder:$("sponsorSortOrder").value,description:$("sponsorDescription").value};request(editingSponsor?"/api/sponsors?id="+editingSponsor:"/api/sponsors",{method:editingSponsor?"PATCH":"POST",body:JSON.stringify(data)}).then(function(){$("status").textContent="Sponsor saved.";resetSponsor();loadSponsors()}).catch(function(e){$("status").textContent=e.message})};
   $("cancelSponsor").onclick=resetSponsor;
+  function loadTeam(){request("/api/team").then(function(members){var list=$("teamList");list.innerHTML="";members.forEach(function(member){var card=document.createElement("div"),title=document.createElement("h3"),info=document.createElement("p"),actions=document.createElement("div"),edit=document.createElement("button"),del=document.createElement("button");card.className="event";title.textContent=member.name;info.textContent=member.role+" · "+member.initials+" · order "+member.sortOrder;actions.className="event-actions";edit.className="btn ghost";edit.textContent="Edit";edit.onclick=function(){startTeamEdit(member)};del.className="btn danger";del.textContent="Delete";del.onclick=function(){deleteTeam(member.id)};actions.appendChild(edit);actions.appendChild(del);card.appendChild(document.createElement("div")).appendChild(title);card.firstChild.appendChild(info);card.appendChild(actions);list.appendChild(card)})}).catch(function(e){$("status").textContent=e.message})}
+  function startTeamEdit(member){editingTeam=member.id;$("teamFormTitle").textContent="Edit a team member";$("teamName").value=member.name;$("teamRole").value=member.role;$("teamInitials").value=member.initials;$("teamAccent").value=member.accent;$("teamSortOrder").value=member.sortOrder;$("cancelTeam").hidden=false;window.scrollTo(0,0)}
+  function resetTeam(){editingTeam=null;$("teamFormTitle").textContent="Add a team member";$("teamForm").reset();$("teamAccent").value="#ec3750";$("teamSortOrder").value="0";$("cancelTeam").hidden=true}
+  function deleteTeam(id){if(!confirm("Delete this team member?"))return;request("/api/team?id="+id,{method:"DELETE"}).then(function(){$("status").textContent="Team member deleted.";loadTeam()}).catch(function(e){$("status").textContent=e.message})}
+  var editingTeam=null;
+  $("teamForm").onsubmit=function(e){e.preventDefault();var data={name:$("teamName").value,role:$("teamRole").value,initials:$("teamInitials").value,accent:$("teamAccent").value,sortOrder:$("teamSortOrder").value};request(editingTeam?"/api/team?id="+editingTeam:"/api/team",{method:editingTeam?"PATCH":"POST",body:JSON.stringify(data)}).then(function(){$("status").textContent="Team member saved.";resetTeam();loadTeam()}).catch(function(e){$("status").textContent=e.message})};
+  $("cancelTeam").onclick=resetTeam;
 })();
 </script>
 </body>
