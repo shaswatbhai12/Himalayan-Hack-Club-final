@@ -1,9 +1,12 @@
 {
   "name": "himalayan-hack-club",
   "private": true,
-  "scripts": { "start": "node local-server.js" },
+  "scripts": {
+    "start": "node local-server.js"
+  },
   "dependencies": {
     "@clerk/backend": "^2.29.0",
-    "@neondatabase/serverless": "^1.0.2"
+    "@neondatabase/serverless": "^1.0.2",
+    "express": "^5.3.0"
   }
 }

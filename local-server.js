@@ -16,7 +16,7 @@ http.createServer(async (req, res) => {
   res.redirect = (c, url) => { res.writeHead(c, { Location: url }); res.end(); };
   if (routes[u.pathname]) {
     req.query = Object.fromEntries(u.searchParams);
-    try { return await require("./api/" + routes[u.pathname])(req, res); }
+    try { return await require("./backend/" + routes[u.pathname])(req, res); }
     catch (e) { console.error(e); return res.status(500).send("Server error"); }
   }
   if (u.pathname === "/" || u.pathname === "/index.html") {
